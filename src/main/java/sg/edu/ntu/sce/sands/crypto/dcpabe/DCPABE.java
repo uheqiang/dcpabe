@@ -12,11 +12,13 @@ import sg.edu.ntu.sce.sands.crypto.dcpabe.key.SecretKey;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 采用合数阶双线性群隐藏访问策略的CP-ABE算法思想,将与门、布尔式和通配符用于访问策略中,利用加密保护的访问控制方法既确保信息资料的安全.
+ */
 public class DCPABE {
     public static GlobalParameters globalSetup(int lambda) {
         GlobalParameters params = new GlobalParameters();
-
+        //Type A1曲线需要二个参数：numPrime是阶数N中有几个质数因子,3；qBit是每个质数因子的比特长度,160\517。
         params.setPairingParameters(new TypeA1CurveGenerator(3, lambda).generate());
         Pairing pairing = PairingFactory.getPairing(params.getPairingParameters());
 
@@ -176,8 +178,9 @@ public class DCPABE {
     public static Message generateRandomMessage(GlobalParameters GP) {
         Pairing pairing = PairingFactory.getPairing(GP.getPairingParameters());
 
-        Element M = pairing.getGT().newRandomElement().getImmutable();
-
-        return new Message(M.toBytes());
+        //Element M = pairing.getGT().newRandomElement().getImmutable();
+        //return new Message(M.toBytes());
+        String msg = "123456gggggggpppppggggggg";
+        return new Message(msg.getBytes());
     }
 }
