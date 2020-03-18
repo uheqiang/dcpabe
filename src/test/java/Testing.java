@@ -62,17 +62,17 @@ public class Testing {
         System.out.println("message: " + new String(dmessage.getM()));
 
         PersonalKeys pkeys2 = new PersonalKeys("user");
-        pkeys.addKey(DCPABE.keyGen("user", "a", authority1.getSecretKeys().get("a"), gp));
-        pkeys.addKey(DCPABE.keyGen("user", "b", authority2.getSecretKeys().get("b"), gp));
-        pkeys.addKey(DCPABE.keyGen("user", "e", authority2.getSecretKeys().get("e"), gp));
+        pkeys2.addKey(DCPABE.keyGen("user", "a", authority1.getSecretKeys().get("a"), gp));
+        pkeys2.addKey(DCPABE.keyGen("user", "b", authority1.getSecretKeys().get("b"), gp));
+        pkeys2.addKey(DCPABE.keyGen("user", "c", authority2.getSecretKeys().get("c"), gp));
         Message dmessage2 = DCPABE.decrypt(ct, pkeys2, gp);
         System.out.println("message: " + new String(dmessage2.getM()));
 
         PersonalKeys pkeys3 = new PersonalKeys("user");
-        pkeys.addKey(DCPABE.keyGen("user", "a", authority1.getSecretKeys().get("a"), gp));
-        pkeys.addKey(DCPABE.keyGen("user", "b", authority2.getSecretKeys().get("b"), gp));
-        pkeys.addKey(DCPABE.keyGen("user", "e", authority2.getSecretKeys().get("e"), gp));
-        pkeys.addKey(DCPABE.keyGen("user", "f", authority2.getSecretKeys().get("f"), gp));
+        pkeys3.addKey(DCPABE.keyGen("user", "a", authority1.getSecretKeys().get("a"), gp));
+        pkeys3.addKey(DCPABE.keyGen("user", "b", authority1.getSecretKeys().get("b"), gp));
+        pkeys3.addKey(DCPABE.keyGen("user", "e", authority3.getSecretKeys().get("e"), gp));
+        pkeys3.addKey(DCPABE.keyGen("user", "f", authority3.getSecretKeys().get("f"), gp));
         Message dmessage3 = DCPABE.decrypt(ct, pkeys3, gp);
         System.out.println("message: " + new String(dmessage3.getM()));
     }
