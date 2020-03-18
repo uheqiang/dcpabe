@@ -2,6 +2,7 @@ package sg.edu.ntu.sce.sands.crypto.dcpabe;
 
 import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Pairing;
+import it.unisa.dia.gas.jpbc.PairingParameters;
 import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
 import it.unisa.dia.gas.plaf.jpbc.pairing.a1.TypeA1CurveGenerator;
 import sg.edu.ntu.sce.sands.crypto.dcpabe.ac.AccessStructure;
@@ -23,7 +24,6 @@ public class DCPABE {
         Pairing pairing = PairingFactory.getPairing(params.getPairingParameters());
 
         params.setG1(pairing.getG1().newRandomElement().getImmutable());
-
         return params;
     }
 

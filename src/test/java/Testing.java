@@ -1,5 +1,6 @@
 import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Pairing;
+import it.unisa.dia.gas.jpbc.PairingParameters;
 import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
 import it.unisa.dia.gas.plaf.jpbc.pairing.a.TypeACurveGenerator;
 import org.junit.Test;
@@ -21,15 +22,20 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(JUnit4.class)
 public class Testing {
+    public static final String TEST_PAIRING_PARAMETERS_PATH_a1_2_128= "params/a1_2_128.properties";
     @Test
     public void test() {
-        GlobalParameters gp = DCPABE.globalSetup(517);
 
+        PairingParameters pairingParameters = PairingFactory.getPairingParameters(TEST_PAIRING_PARAMETERS_PATH_a1_2_128);
+        Pairing pairing = PairingFactory.getPairing(pairingParameters);
+        Element element = pairing.getG1().newRandomElement().getImmutable();
+
+        GlobalParameters gp = DCPABE.globalSetup(160);
         FileOutputStream fos= null;
         try {
             fos = new FileOutputStream("F://MyTest.txt");
             ObjectOutputStream objectOutputStream=new ObjectOutputStream(fos);
-            objectOutputStream.writeObject(gp);
+            objectOutputStream.writeObject(gp.getPairingParameters());
             objectOutputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -38,7 +44,15 @@ public class Testing {
 
     @Test
     public void testDCPABE2() {
-        GlobalParameters gp = DCPABE.globalSetup(160);
+//        GlobalParameters gp = DCPABE.globalSetup(160);
+
+        PairingParameters pairingParameters = PairingFactory.getPairingParameters(TEST_PAIRING_PARAMETERS_PATH_a1_2_128);
+        Pairing pairing = PairingFactory.getPairing(pairingParameters);
+        Element element = pairing.getG1().newRandomElement().getImmutable();
+
+        GlobalParameters gp = new GlobalParameters();
+        gp.setG1(element);
+        gp.setPairingParameters(pairingParameters);
         PublicKeys publicKeys = new PublicKeys();
 
         AuthorityKeys authority1 = DCPABE.authoritySetup("a1", gp, "a", "b");
