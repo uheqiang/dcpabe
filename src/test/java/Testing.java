@@ -48,10 +48,10 @@ public class Testing {
 
         PairingParameters pairingParameters = PairingFactory.getPairingParameters(TEST_PAIRING_PARAMETERS_PATH_a1_2_128);
         Pairing pairing = PairingFactory.getPairing(pairingParameters);
-        Element element = pairing.getG1().newRandomElement().getImmutable();
+        Element G1 = pairing.getG1().newRandomElement().getImmutable();
 
         GlobalParameters gp = new GlobalParameters();
-        gp.setG1(element);
+        gp.setG1(G1);
         gp.setPairingParameters(pairingParameters);
         PublicKeys publicKeys = new PublicKeys();
 
