@@ -53,6 +53,7 @@ public class Testing {
         GlobalParameters gp = new GlobalParameters();
         gp.setG1(G1);
         gp.setPairingParameters(pairingParameters);
+
         PublicKeys publicKeys = new PublicKeys();
 
         AuthorityKeys authority1 = DCPABE.authoritySetup("a1", gp, "a", "b");
